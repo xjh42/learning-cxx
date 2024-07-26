@@ -34,7 +34,12 @@ struct Tensor4D {
     // 例如，`this` 形状为 `[1, 2, 3, 4]`，`others` 形状为 `[1, 2, 1, 4]`，
     // 则 `this` 与 `others` 相加时，3 个形状为 `[1, 2, 1, 4]` 的子张量各自与 `others` 对应项相加。
     Tensor4D &operator+=(Tensor4D const &others) {
-        // TODO: 实现单向广播的加法
+        int size = shape[0] * shape[1] * shape[2] * shape[3];
+        int other_size = others.shape[0] * others.shape[1] * others.shape[2] * others.shape[3];
+        int factor = size / other_size;
+        for (int i = 0; i < size; i++) {
+            data[i] += others.data[i / factor];
+        }
         return *this;
     }
 };
