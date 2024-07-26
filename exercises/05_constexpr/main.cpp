@@ -1,6 +1,6 @@
 #include "../exercise.h"
 
-constexpr unsigned long long fibonacci(int i) {
+constexpr unsigned long long fibonacci(unsigned long long i) {
     switch (i) {
         case 0:
             return 0;
